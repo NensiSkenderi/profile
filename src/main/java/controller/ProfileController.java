@@ -25,11 +25,15 @@ public class ProfileController implements Initializable {
 	}
 
 	private void fillData() {
-		Profile data1 = new Profile();
-		data1.setFirstName("First Name");
-		data1.setLastName("Last Name");
+		Profile row1 = new Profile();
+		row1.setFirstName("Nensi");
+		row1.setLastName("Skenderi");
 		
-		profileData.addAll(data1);
+		Profile row2 = new Profile();
+		row2.setFirstName("E");
+		row2.setLastName("K");
+		
+		profileData.addAll(row1, row2);
 		
 		tblcolFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
 		tblcolLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
