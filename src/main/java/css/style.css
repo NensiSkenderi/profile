@@ -3,12 +3,22 @@
 	-fx-border-width : 0px 0px 1px 0px;
 }
 
-.btnDil {
-   -fx-background-color : white;
-     -fx-graphic: url("../images/cancel.png");
+.btnAdd {
+	 -fx-background-color :  #E64A19;
+     -fx-graphic: url("../images/add.png");
 }
 
-.btnSubmit {
-	-fx-background-color : #4186CE;
-     -fx-graphic: url("../images/submit.png");
+.btnEdit {
+	 -fx-background-color :  #E64A19;
+     -fx-graphic: url("../images/edit.png");
+}
+
+.btnSave {
+	 -fx-background-color :  #00BCD4;
+     -fx-graphic: url("../images/save-white.png");
+}
+
+.btnCancel {
+	 -fx-background-color :  #E64A19;
+     -fx-graphic: url("../images/cancel-white.png");
 }
