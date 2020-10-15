@@ -47,7 +47,7 @@
 }
 
 .table-view .table-cell{
-    -fx-text-fill: #777777; 
+    -fx-text-fill: black; 
     -fx-border-width: 0;
 }
 
@@ -144,6 +144,6 @@
     -fx-graphic: url("../images/delete.png");
     -fx-cursor: hand;
     -fx-background-radius : 10;
-    -jfx-rippler-fill: white;
+    -fx-background-color: transparent;
 }
 

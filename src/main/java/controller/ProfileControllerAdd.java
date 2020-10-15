@@ -8,11 +8,14 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
 import dao.ControlDAO;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TextField;
 import model.Profile;
 import utils.Helpers;
 
@@ -60,5 +63,5 @@ public class ProfileControllerAdd implements Initializable {
 	private void cancel() {
 		utils.Helpers.close_stage(btnCancel);
 	}
-
+	
 }

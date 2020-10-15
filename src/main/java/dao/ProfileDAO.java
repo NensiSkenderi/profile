@@ -57,7 +57,7 @@ public class ProfileDAO extends DAO {
 			p.setCc(rs.getString(8));
 			p.setCcSecurityCode(rs.getString(9));
 			p.setPhone(rs.getString(10));
-			p.setPhone(rs.getString(11));
+			p.setEmailAddress(rs.getString(11));
 			data.add(p);
 		}
 		return data;
