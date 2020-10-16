@@ -40,7 +40,7 @@ public class ProfileDAO extends DAO {
 	
 	public List<Profile> viewProfiles() throws SQLException{
 		List<Profile> data = new ArrayList<Profile>();
-		String query = "SELECT firstName, lastName, line1, line2, town, regionName, postalCode, CC, CCSecurityCode, phone, email"
+		String query = "SELECT firstName, lastName, line1, line2, town, regionName, postalCode, CC, CCSecurityCode, phone, email, profileId"
 				+ " FROM profile.data";
 		stm = connector.prepareStatement(query);
 		rs = stm.executeQuery(query);
@@ -58,6 +58,7 @@ public class ProfileDAO extends DAO {
 			p.setCcSecurityCode(rs.getString(9));
 			p.setPhone(rs.getString(10));
 			p.setEmailAddress(rs.getString(11));
+			p.setProfileNumber(rs.getInt(12));
 			data.add(p);
 		}
 		return data;
@@ -91,6 +92,7 @@ public class ProfileDAO extends DAO {
 		stm.setString(10, p.getPhone());
 		stm.setString(11, p.getEmailAddress());
 		
+		stm.setInt(12, p.getProfileNumber());
 		stm.executeUpdate();
 		stm.close();
 	}

@@ -8,14 +8,11 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
 import dao.ControlDAO;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TextField;
 import model.Profile;
 import utils.Helpers;
 
@@ -31,9 +28,27 @@ public class ProfileControllerAdd implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+		if(ProfileController.edit == true) {
+			profileId = ProfileController.profileDataHolder.getProfileNumber();
+			getData(ProfileController.profileDataHolder);
+		}
+		else
+			profileId = 0;
 	}
 
+	private void getData(Profile p) {
+		txtFirstName.setText(p.getFirstName()); 
+		txtLastName.setText(p.getLastName());
+		txtLine1.setText(p.getLine1());
+		txtLine2.setText(p.getLine2());
+		txtTown.setText(p.getTown());
+		txtRegionName.setText(p.getRegionName());
+		txtPostalCode.setText(p.getPostalCode());
+		txtCC.setText(p.getCc());
+		txtCCSecurityCode.setText(p.getCcSecurityCode());
+		txtPhone.setText(p.getPhone());
+		txtEmail.setText(p.getEmailAddress());
+	}
 	
 	@FXML
 	private void save() throws SQLException {
@@ -50,6 +65,7 @@ public class ProfileControllerAdd implements Initializable {
 		p.setCcSecurityCode(txtCCSecurityCode.getText());
 		p.setPhone(txtPhone.getText());
 		p.setEmailAddress(txtEmail.getText());
+		p.setProfileNumber(profileId);
 		
 		if(profileId == 0) 
 			ControlDAO.getControlDao().getProfileDao().addProfile(p);

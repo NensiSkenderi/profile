@@ -3,7 +3,6 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXAlert;
@@ -235,7 +234,7 @@ public class ProfileController implements Initializable {
 				ObservableList<TableColumn<Profile, ?>> cols = tblProfile.getColumns();
 
 				for(int i=0; i<profileData.size(); i++) {
-					for(int j=1; j<cols.size(); j++) {
+					for(int j=1; j<cols.size() - 1; j++) {
 						TableColumn<Profile, ?> col = cols.get(j);
 						String cellValue = col.getCellData(profileData.get(i)).toString();
 						cellValue = cellValue.toLowerCase();
@@ -281,6 +280,7 @@ public class ProfileController implements Initializable {
 				createTextField();
 				setText(null);
 				setGraphic(textField);
+				textField.requestFocus();
 				textField.selectAll();
 			}
 		}
