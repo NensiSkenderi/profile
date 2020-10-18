@@ -1,6 +1,10 @@
 package controller;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -9,21 +13,23 @@ import com.jfoenix.controls.JFXAlert;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
-import dao.ControlDAO;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -35,9 +41,9 @@ public class ProfileController implements Initializable {
 
 	@FXML private TableView<Profile> tblProfile;
 	@FXML private TableColumn<Profile, String> tblcolProfileNumber, tblcolFirstName, tblcolLastName,
-	tblcolLine1, tblcolLine2, tblcolTown, tblcolRegionName, tblcolPostalCode, tblcolCC,
-	tblcolCCSecurityCode, tblcolPhone, tblcolEmail;
-	@FXML private TableColumn<Profile, Profile> tblcolDelete;
+	tblcolLine1, tblcolLine2, tblcolTown, tblcolRegionName, tblcolPostalCode, tblcolCountryName, tblcolCcNumber,
+	tblcolCcExpMonth, tblcolCcExpYear, tblcolCCSecurityCode, tblcolPhone, tblcolEmail;
+	@FXML private TableColumn<Profile, Boolean> tblcolDelete;
 	@FXML private JFXButton btnAdd, btnEdit;
 	@FXML private JFXTextField txtSearch;
 	public static Profile profileDataHolder = new Profile();
@@ -49,16 +55,49 @@ public class ProfileController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
 			fillData();
-			searchTableview();
-		} catch (SQLException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void fillData() throws SQLException {
+	private void fillData() throws IOException {
 		tblProfile.getItems().clear();
-		profileData.addAll(ControlDAO.getControlDao().getProfileDao().viewProfiles());
+		String FieldDelimiter = ",";
 
+		InputStream inputStream = 
+				getClass().getClassLoader().getResourceAsStream("profile.csv");
+		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream ));
+		boolean firstLine = true;
+
+		String line;
+		while ((line = reader.readLine()) != null) {
+			if (firstLine) {
+				firstLine = false;
+				continue;
+			}
+			String[] fields = line.split(FieldDelimiter, -1);
+
+			Profile profile = new Profile();
+			profile.setFirstName(fields[0]);
+			profile.setLastName(fields[1]);
+			profile.setLine1(fields[2]);
+			profile.setLine2(fields[3]);
+			profile.setTown(fields[4]);
+			profile.setRegionName(fields[5]);
+			profile.setPostalCode(fields[6]);
+			profile.setCountryCode(fields[7]);
+			profile.setCcNumber(fields[8]);
+			profile.setCcExpMonth(fields[9]);
+			profile.setCcExpYear(fields[10]);
+			profile.setCcSecurityCode(fields[11]);
+			profile.setPhone(fields[12]);
+			profile.setEmailAddress(fields[13]);
+
+			profileData.add(profile);
+
+		}
+
+		reader.close();
 		tblProfile.setEditable(true);
 		Callback<TableColumn<Profile, String>, TableCell<Profile, String>> cellFactory
 		= (TableColumn<Profile, String> param) -> new EditingCell();
@@ -127,13 +166,13 @@ public class ProfileController implements Initializable {
 					.setPostalCode(t.getNewValue());
 
 				});
-		tblcolCC.setCellValueFactory(new PropertyValueFactory<>("cc"));
-		tblcolCC.setCellFactory(cellFactory);
-		tblcolCC.setOnEditCommit(
+		tblcolCountryName.setCellValueFactory(new PropertyValueFactory<>("countryCode"));
+		tblcolCountryName.setCellFactory(cellFactory);
+		tblcolCountryName.setOnEditCommit(
 				(TableColumn.CellEditEvent<Profile, String> t) -> {
 					((Profile) t.getTableView().getItems()
 							.get(t.getTablePosition().getRow()))
-					.setCc(t.getNewValue());
+					.setCountryCode(t.getNewValue());
 
 				});
 		tblcolCCSecurityCode.setCellValueFactory(new PropertyValueFactory<>("ccSecurityCode"));
@@ -143,6 +182,33 @@ public class ProfileController implements Initializable {
 					((Profile) t.getTableView().getItems()
 							.get(t.getTablePosition().getRow()))
 					.setCcSecurityCode(t.getNewValue());
+
+				});
+		tblcolCcNumber.setCellValueFactory(new PropertyValueFactory<>("ccNumber"));
+		tblcolCcNumber.setCellFactory(cellFactory);
+		tblcolCcNumber.setOnEditCommit(
+				(TableColumn.CellEditEvent<Profile, String> t) -> {
+					((Profile) t.getTableView().getItems()
+							.get(t.getTablePosition().getRow()))
+					.setCcNumber(t.getNewValue());
+
+				});
+		tblcolCcExpMonth.setCellValueFactory(new PropertyValueFactory<>("ccExpMonth"));
+		tblcolCcExpMonth.setCellFactory(cellFactory);
+		tblcolCcExpMonth.setOnEditCommit(
+				(TableColumn.CellEditEvent<Profile, String> t) -> {
+					((Profile) t.getTableView().getItems()
+							.get(t.getTablePosition().getRow()))
+					.setCcExpMonth(t.getNewValue());
+
+				});
+		tblcolCcExpYear.setCellValueFactory(new PropertyValueFactory<>("ccExpYear"));
+		tblcolCcExpYear.setCellFactory(cellFactory);
+		tblcolCcExpYear.setOnEditCommit(
+				(TableColumn.CellEditEvent<Profile, String> t) -> {
+					((Profile) t.getTableView().getItems()
+							.get(t.getTablePosition().getRow()))
+					.setCcExpYear(t.getNewValue());
 
 				});
 		tblcolPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
@@ -163,40 +229,26 @@ public class ProfileController implements Initializable {
 					.setEmailAddress(t.getNewValue());
 
 				});
-		tblcolDelete.setStyle("-fx-alignment:center;");
-		tblcolDelete.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
-		tblcolDelete.setCellFactory(param -> new TableCell<Profile, Profile>() {
+		tblcolDelete.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Profile, Boolean>, 
+				ObservableValue<Boolean>>() {
 
-			Button delete = new Button("");
-			protected void updateItem(Profile p, boolean empty) {
-				if (p == null) {
-					setGraphic(null);
-					return;
-				}
-
-				setGraphic(delete);
-				Helpers.styleDeleteButton(delete);
-				delete.setOnMouseClicked(event -> {
-					JFXAlert alert = new JFXAlert((Stage) tblProfile.getScene().getWindow());
-					JFXButton cancel = new JFXButton("Cancel");
-					cancel.setStyle("-fx-background-color: #E64A19; -fx-text-fill: white;-fx-cursor: hand;");
-					JFXButton confirm = new JFXButton("Confirm");
-					confirm.setStyle("-fx-background-color: #00BCD4; -fx-text-fill: white;-fx-cursor: hand;");
-					Helpers.alertDelete(alert, confirm, cancel, p.getFirstName(), "");	
-					confirm.setOnAction(e-> {
-						//						int selectedIndex = tblProfile.getSelectionModel().getSelectedIndex();
-						//						tblProfile.getItems().remove(selectedIndex);
-
-						alert.close();
-					}); 
-
-					cancel.setOnAction( e1 -> {
-						alert.close();
-					});
-					Helpers.refreshFocusTable(tblProfile);
+					@Override
+					public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<Profile, Boolean> p) {
+						return new SimpleBooleanProperty(p.getValue() != null);
+					}
 				});
-			}
-		});
+
+		//Adding the Button to the cell
+		tblcolDelete.setCellFactory(
+				new Callback<TableColumn<Profile, Boolean>, TableCell<Profile, Boolean>>() {
+
+					@Override
+					public TableCell<Profile, Boolean> call(TableColumn<Profile, Boolean> p) {
+						return new ButtonCell();
+					}
+
+				});
 
 		tblProfile.setItems(profileData);
 	}
@@ -211,7 +263,7 @@ public class ProfileController implements Initializable {
 		profileDataHolder.setTown(profile.getTown());
 		profileDataHolder.setRegionName(profile.getRegionName());
 		profileDataHolder.setPostalCode(profile.getPostalCode());
-		profileDataHolder.setCc(profile.getCc());
+		//profileDataHolder.setCc(profile.getCc());
 		profileDataHolder.setCcSecurityCode(profile.getCcSecurityCode());
 		profileDataHolder.setPhone(profile.getPhone());
 		profileDataHolder.setEmailAddress(profile.getEmailAddress());
@@ -321,7 +373,6 @@ public class ProfileController implements Initializable {
 			textField.setOnAction((e) -> commitEdit(textField.getText()));
 			textField.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
 				if (!newValue) {
-					System.out.println("Commiting " + textField.getText());
 					commitEdit(textField.getText());
 				}
 			});
@@ -332,5 +383,32 @@ public class ProfileController implements Initializable {
 		}
 	}
 
+	private class ButtonCell extends TableCell<Profile, Boolean> {
+		final Button cellButton = new Button("Delete");
+
+		ButtonCell(){
+
+			//Action when the button is pressed
+			cellButton.setOnAction(new EventHandler<ActionEvent>(){
+
+				@Override
+				public void handle(ActionEvent t) {
+					// get Selected Item
+					Profile currentProfile = (Profile) ButtonCell.this.getTableView().getItems().get(ButtonCell.this.getIndex());
+					//remove selected item from the table list
+					profileData.remove(currentProfile);
+				}
+			});
+		}
+
+		//Display button if the row is not empty
+		@Override
+		protected void updateItem(Boolean t, boolean empty) {
+			super.updateItem(t, empty);
+			if(!empty){
+				setGraphic(cellButton);
+			}
+		}
+	}
 }
 

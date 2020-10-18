@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
-import dao.ControlDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -44,7 +43,7 @@ public class ProfileControllerAdd implements Initializable {
 		txtTown.setText(p.getTown());
 		txtRegionName.setText(p.getRegionName());
 		txtPostalCode.setText(p.getPostalCode());
-		txtCC.setText(p.getCc());
+		//txtCC.setText(p.getCc());
 		txtCCSecurityCode.setText(p.getCcSecurityCode());
 		txtPhone.setText(p.getPhone());
 		txtEmail.setText(p.getEmailAddress());
@@ -61,16 +60,16 @@ public class ProfileControllerAdd implements Initializable {
 		p.setTown(txtTown.getText());
 		p.setRegionName(txtRegionName.getText());
 		p.setPostalCode(txtPostalCode.getText());
-		p.setCc(txtCC.getText());
+		//p.setCc(txtCC.getText());
 		p.setCcSecurityCode(txtCCSecurityCode.getText());
 		p.setPhone(txtPhone.getText());
 		p.setEmailAddress(txtEmail.getText());
 		p.setProfileNumber(profileId);
-		
-		if(profileId == 0) 
-			ControlDAO.getControlDao().getProfileDao().addProfile(p);
-		else 
-			ControlDAO.getControlDao().getProfileDao().updateProfile(p);
+//		
+//		if(profileId == 0) 
+//			ControlDAO.getControlDao().getProfileDao().addProfile(p);
+//		else 
+//			ControlDAO.getControlDao().getProfileDao().updateProfile(p);
 		
 		Helpers.close_stage(btnCancel);
 	}

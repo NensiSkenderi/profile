@@ -10,15 +10,20 @@ public class Profile {
     public String town;
     public String regionName;
     public String postalCode;
+    public String countryCode;
     public String ccSecurityCode;
-    public String cc;
+    public String ccNumber;
+    public String ccTypeName;
+    public String ccTypeCode;
+    public String ccExpMonth;
+    public String ccExpYear;
     public String phone;
     public String emailAddress;
     
     public Profile() {}
     
 	public Profile(int profileNumber, String firstName, String lastName, String line1, String line2, String town,
-			String regionName, String postalCode, String ccSecurityCode, String cc, String phone, String emailAddress) {
+			String regionName, String postalCode, String ccSecurityCode, String phone, String emailAddress) {
 		this.profileNumber = profileNumber;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -28,7 +33,6 @@ public class Profile {
 		this.regionName = regionName;
 		this.postalCode = postalCode;
 		this.ccSecurityCode = ccSecurityCode;
-		this.cc = cc;
 		this.phone = phone;
 		this.emailAddress = emailAddress;
 	}
@@ -105,14 +109,6 @@ public class Profile {
 		this.ccSecurityCode = ccSecurityCode;
 	}
 
-	public String getCc() {
-		return cc;
-	}
-
-	public void setCc(String cc) {
-		this.cc = cc;
-	}
-
 	public String getPhone() {
 		return phone;
 	}
@@ -127,6 +123,54 @@ public class Profile {
 
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
+	}
+
+	public String getCountryCode() {
+		return countryCode;
+	}
+
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
+	}
+
+	public String getCcNumber() {
+		return ccNumber;
+	}
+
+	public void setCcNumber(String ccNumber) {
+		this.ccNumber = ccNumber;
+	}
+
+	public String getCcTypeName() {
+		return ccTypeName;
+	}
+
+	public void setCcTypeName(String ccTypeName) {
+		this.ccTypeName = ccTypeName;
+	}
+
+	public String getCcTypeCode() {
+		return ccTypeCode;
+	}
+
+	public void setCcTypeCode(String ccTypeCode) {
+		this.ccTypeCode = ccTypeCode;
+	}
+
+	public String getCcExpMonth() {
+		return ccExpMonth;
+	}
+
+	public void setCcExpMonth(String ccExpMonth) {
+		this.ccExpMonth = ccExpMonth;
+	}
+
+	public String getCcExpYear() {
+		return ccExpYear;
+	}
+
+	public void setCcExpYear(String ccExpYear) {
+		this.ccExpYear = ccExpYear;
 	}
 	
     
