@@ -1,11 +1,15 @@
 package controller;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import com.opencsv.CSVWriter;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,9 +26,9 @@ public class ProfileControllerAdd implements Initializable {
 	txtCC, txtCCSecurityCode, txtPhone, txtEmail;
 	@FXML private Label lblError;
 	private int profileId = 0;
-	
+
 	ObservableList<Profile> profileData = FXCollections.observableArrayList();
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		if(ProfileController.edit == true) {
@@ -47,10 +51,12 @@ public class ProfileControllerAdd implements Initializable {
 		txtCCSecurityCode.setText(p.getCcSecurityCode());
 		txtPhone.setText(p.getPhone());
 		txtEmail.setText(p.getEmailAddress());
+
+
 	}
-	
+
 	@FXML
-	private void save() throws SQLException {
+	private void save() throws SQLException, IOException {
 		Profile p = new Profile();
 		p.setProfileNumber(profileId);
 		p.setFirstName(txtFirstName.getText());
@@ -60,23 +66,45 @@ public class ProfileControllerAdd implements Initializable {
 		p.setTown(txtTown.getText());
 		p.setRegionName(txtRegionName.getText());
 		p.setPostalCode(txtPostalCode.getText());
-		//p.setCc(txtCC.getText());
+
+		//bej set-et e reja nga txt fields e reja qe do shtoje ergi
+
 		p.setCcSecurityCode(txtCCSecurityCode.getText());
 		p.setPhone(txtPhone.getText());
 		p.setEmailAddress(txtEmail.getText());
 		p.setProfileNumber(profileId);
-//		
-//		if(profileId == 0) 
-//			ControlDAO.getControlDao().getProfileDao().addProfile(p);
-//		else 
-//			ControlDAO.getControlDao().getProfileDao().updateProfile(p);
-		
+
+
+//		FileWriter pw = new FileWriter("F:\\data.csv");
+//		Iterator s = customerIterator(); --jep error
+//		if (s.hasNext()==false){
+//			System.out.println("Empty");
+//		}
+//		while(s.hasNext()){
+//			Profile profile  = (Profile) s.next();
+//			System.out.println(profile.toString()+"\n");
+//			pw.append(profile.getFirstName());
+//			pw.append(",");
+//			pw.append(profile.getLastName());
+//			pw.append("\n");
+//		}
+//		pw.flush();
+//		pw.close();
+
+
+		//menyra 2 - te perdorim open csv
+		String csv = "profile.csv";
+		CSVWriter writer = new CSVWriter(new FileWriter(csv, true));
+		String [] record = "3,David,Feezor,USA,40".split(",");
+		writer.writeNext(record);
+		writer.close();
+
 		Helpers.close_stage(btnCancel);
 	}
-	
+
 	@FXML
 	private void cancel() {
 		utils.Helpers.close_stage(btnCancel);
 	}
-	
+
 }

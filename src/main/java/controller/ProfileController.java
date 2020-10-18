@@ -66,7 +66,7 @@ public class ProfileController implements Initializable {
 
 		InputStream inputStream = 
 				getClass().getClassLoader().getResourceAsStream("profile.csv");
-		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream ));
+		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 		boolean firstLine = true;
 
 		String line;
