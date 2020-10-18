@@ -2,46 +2,45 @@
 /******TABLE VIEW******** */
 
 .table-view{
-   -fx-background-color: transparent;
+   -fx-background-color: #444444;
    -fx-border-color: #F5F5F5; 
 }
 
 .table-view:focused{
-    -fx-background-color: transparent;
+    -fx-background-color: #092537;
 }
 
 .table-view .column-header-background{
-    -fx-background-color: #00BCD4;
+    -fx-background-color: #092537;
 }
 
 .table-view .column-header-background .label{
-    -fx-background-color: transparent;
+    -fx-background-color: #092537;
     -fx-text-fill: white;
     -fx-font-size: 16px;
     -fx-alignment:center;
     -fx-font-weight: 300;
-    -fx-pref-height: 50;
+    -fx-pref-height: 70;
     -fx-border-color : lightgrey;
     -fx-border-width: 0 0 0 0;
 }
 
 .table-view .column-header {
-    -fx-background-color: transparent;
+    -fx-background-color: #092537;
 }
 
 .table-row-cell{
-    -fx-background-color: white;
-    -fx-border-color : #F5F5F5;
+    -fx-background-color: #444444;
+    -fx-border-color : #E64A19;
     -fx-font-size:13px;
-    -fx-pref-height: 70; 
+    -fx-pref-height: 60; 
     -fx-font-weight: bold;
 }
 
 .table-row-cell:odd{
-    -fx-background-color: white;
+    -fx-background-color: #10354D;
     -fx-padding: 0;
 }
-
 .table-column {
   -fx-alignment:center;
 }
@@ -50,19 +49,22 @@
     -fx-text-fill: black; 
     -fx-border-width: 0;
 }
+.table-view .filler {
+ -fx-background-color: #092537;
+}
 
 .table-row-cell:selected {
-   -fx-background-color: #e0ebff; 
+   -fx-background-color: white;
 }
 .table-row-cell:selected .text {
        -fx-fill: black ;
 }
 
 .table-row-cell .text {
-       -fx-fill:  #E64A19 ;
+       -fx-fill:  white;
 }
 .table-view .scroll-bar{
-	-fx-background-color: #CDCDCD;
+	-fx-background-color: #31333c;
  	-fx-background-radius: 1em;
 }
 .table-view .scroll-bar:horizontal .track,
@@ -147,3 +149,7 @@
     -fx-background-color: transparent;
 }
 
+.text-field {
+    -fx-prompt-text-fill: white;
+    -fx-text-fill: white;
+}

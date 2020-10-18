@@ -14,7 +14,11 @@
 }
 
 .text-field {
-    -fx-prompt-text-fill: #00B3CA;
+    -fx-prompt-text-fill: white;
     -fx-text-fill: white;
+}
+.jfx-text-field {
+    -jfx-focus-color: #95eaf5;
+    -jfx-unfocus-color: #95eaf5;
 }
 
