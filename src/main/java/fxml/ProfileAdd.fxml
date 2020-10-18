@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="718.0" prefWidth="964.0" style="-fx-background-color: white; -fx-border-color: #00B3CA;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProfileControllerAdd">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="718.0" prefWidth="964.0" style="-fx-background-color: #474747; -fx-border-color: #474747;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProfileControllerAdd">
    <children>
       <Pane prefHeight="89.0" prefWidth="964.0" style="-fx-background-color: #00BCD4;">
          <children>
@@ -20,57 +20,57 @@
             </Label>
          </children>
       </Pane>
-      <JFXTextField fx:id="txtFirstName" focusColor="#00bcd4" labelFloat="true" layoutX="99.0" layoutY="133.0" prefHeight="39.0" prefWidth="302.0" promptText="First Name" unFocusColor="#00bcd4">
+      <JFXTextField fx:id="txtFirstName" focusColor="#00bcd4" labelFloat="true" layoutX="99.0" layoutY="133.0" prefHeight="39.0" prefWidth="302.0" promptText="First Name" styleClass="text-field" stylesheets="@../css/addViews.css" unFocusColor="#00bcd4">
          <font>
             <Font size="18.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtLastName" focusColor="#00bcd4" labelFloat="true" layoutX="99.0" layoutY="225.0" prefHeight="42.0" prefWidth="302.0" promptText="Last Name" unFocusColor="#00bcd4">
+      <JFXTextField fx:id="txtLastName" focusColor="#00bcd4" labelFloat="true" layoutX="99.0" layoutY="225.0" prefHeight="42.0" prefWidth="302.0" promptText="Last Name" stylesheets="@../css/addViews.css" unFocusColor="#00bcd4">
          <font>
             <Font size="18.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtLine1" focusColor="#00bcd4" labelFloat="true" layoutX="99.0" layoutY="310.0" prefHeight="42.0" prefWidth="302.0" promptText="Line 1" unFocusColor="#00bcd4">
+      <JFXTextField fx:id="txtLine1" focusColor="#00bcd4" labelFloat="true" layoutX="99.0" layoutY="310.0" prefHeight="42.0" prefWidth="302.0" promptText="Line 1" stylesheets="@../css/addViews.css" unFocusColor="#00bcd4">
          <font>
             <Font size="18.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtLine2" focusColor="#00bcd4" labelFloat="true" layoutX="99.0" layoutY="395.0" prefHeight="39.0" prefWidth="302.0" promptText="Line 2" unFocusColor="#00bcd4">
+      <JFXTextField fx:id="txtLine2" focusColor="#00bcd4" labelFloat="true" layoutX="99.0" layoutY="395.0" prefHeight="39.0" prefWidth="302.0" promptText="Line 2" stylesheets="@../css/addViews.css" unFocusColor="#00bcd4">
          <font>
             <Font size="18.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtTown" focusColor="#00bcd4" labelFloat="true" layoutX="99.0" layoutY="478.0" prefHeight="39.0" prefWidth="302.0" promptText="Town" unFocusColor="#00bcd4">
+      <JFXTextField fx:id="txtTown" focusColor="#00bcd4" labelFloat="true" layoutX="99.0" layoutY="478.0" prefHeight="39.0" prefWidth="302.0" promptText="Town" stylesheets="@../css/addViews.css" unFocusColor="#00bcd4">
          <font>
             <Font size="18.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtRegionName" focusColor="#00bcd4" labelFloat="true" layoutX="99.0" layoutY="565.0" prefHeight="39.0" prefWidth="302.0" promptText="Region Name" unFocusColor="#00bcd4">
+      <JFXTextField fx:id="txtRegionName" focusColor="#00bcd4" labelFloat="true" layoutX="99.0" layoutY="565.0" prefHeight="39.0" prefWidth="302.0" promptText="Region Name" stylesheets="@../css/addViews.css" unFocusColor="#00bcd4">
          <font>
             <Font size="18.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtPostalCode" focusColor="#00bcd4" labelFloat="true" layoutX="560.0" layoutY="134.0" prefHeight="39.0" prefWidth="302.0" promptText="Postal Code" unFocusColor="#00bcd4">
+      <JFXTextField fx:id="txtPostalCode" focusColor="#00bcd4" labelFloat="true" layoutX="560.0" layoutY="134.0" prefHeight="39.0" prefWidth="302.0" promptText="Postal Code" stylesheets="@../css/addViews.css" unFocusColor="#00bcd4">
          <font>
             <Font size="18.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtCC" focusColor="#00bcd4" labelFloat="true" layoutX="560.0" layoutY="217.0" prefHeight="39.0" prefWidth="302.0" promptText="CC" unFocusColor="#00bcd4">
+      <JFXTextField fx:id="txtCC" focusColor="#00bcd4" labelFloat="true" layoutX="560.0" layoutY="217.0" prefHeight="39.0" prefWidth="302.0" promptText="CC" stylesheets="@../css/addViews.css" unFocusColor="#00bcd4">
          <font>
             <Font size="18.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtCCSecurityCode" focusColor="#00bcd4" labelFloat="true" layoutX="560.0" layoutY="302.0" prefHeight="39.0" prefWidth="302.0" promptText="CC Security Code" unFocusColor="#00bcd4">
+      <JFXTextField fx:id="txtCCSecurityCode" focusColor="#00bcd4" labelFloat="true" layoutX="560.0" layoutY="302.0" prefHeight="39.0" prefWidth="302.0" promptText="CC Security Code" stylesheets="@../css/addViews.css" unFocusColor="#00bcd4">
          <font>
             <Font size="18.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtPhone" focusColor="#00bcd4" labelFloat="true" layoutX="560.0" layoutY="386.0" prefHeight="39.0" prefWidth="302.0" promptText="Phone" unFocusColor="#00bcd4">
+      <JFXTextField fx:id="txtPhone" focusColor="#00bcd4" labelFloat="true" layoutX="560.0" layoutY="386.0" prefHeight="39.0" prefWidth="302.0" promptText="Phone" stylesheets="@../css/addViews.css" unFocusColor="#00bcd4">
          <font>
             <Font size="18.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtEmail" focusColor="#00bcd4" labelFloat="true" layoutX="560.0" layoutY="469.0" prefHeight="39.0" prefWidth="302.0" promptText="Email" unFocusColor="#00bcd4">
+      <JFXTextField fx:id="txtEmail" focusColor="#00bcd4" labelFloat="true" layoutX="560.0" layoutY="469.0" prefHeight="39.0" prefWidth="302.0" promptText="Email" stylesheets="@../css/addViews.css" unFocusColor="#00bcd4">
          <font>
             <Font size="18.0" />
          </font>

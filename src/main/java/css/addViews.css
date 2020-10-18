@@ -12,3 +12,9 @@
 	 -fx-background-color :   #B74636;
      -fx-graphic: url("../images/cancel-white.png");
 }
+
+.text-field {
+    -fx-prompt-text-fill: #00B3CA;
+    -fx-text-fill: white;
+}
+
