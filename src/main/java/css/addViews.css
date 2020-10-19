@@ -17,8 +17,27 @@
     -fx-prompt-text-fill: white;
     -fx-text-fill: white;
 }
+
 .jfx-text-field {
     -jfx-focus-color: #95eaf5;
     -jfx-unfocus-color: #95eaf5;
 }
 
+.combo-box{
+     -fx-prompt-text-fill: white;
+     -fx-text-fill: white;
+     -fx-font-size: 18px;
+}
+
+.combo-box-base .text{ 
+	-fx-fill: white;
+}
+
+.combo-box .list-cell 
+{
+    -fx-background: transparent;
+    -fx-background-color: #474747;
+    -fx-text-fill: white;
+    -fx-padding: 3 0 2 7;
+    -fx-cell-size: 1.66667em; 
+}

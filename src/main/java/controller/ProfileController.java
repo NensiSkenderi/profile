@@ -269,6 +269,7 @@ public class ProfileController implements Initializable {
 		profileDataHolder.setEmailAddress(profile.getEmailAddress());
 
 		new utils.Helpers().open_edit_scene("ProfileAdd", "icon");
+		if(!ProfileControllerAdd.isCancel)
 		fillData();
 	}
 
@@ -306,6 +307,7 @@ public class ProfileController implements Initializable {
 	private void add() throws IOException, SQLException {
 		edit = false;
 		new utils.Helpers().open_edit_scene("ProfileAdd", "icon");
+		if(!ProfileControllerAdd.isCancel)
 		fillData();
 	}
 
