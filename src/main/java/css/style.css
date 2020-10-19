@@ -8,9 +8,9 @@
      -fx-graphic: url("../images/add.png");
 }
 
-.btnEdit {
+.btnUpdateCSV {
 	 -fx-background-color :  #E64A19;
-     -fx-graphic: url("../images/edit.png");
+     -fx-graphic: url("../images/update.png");
 }
 
 .btnSave {

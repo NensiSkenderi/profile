@@ -46,7 +46,7 @@ public class ProfileController implements Initializable {
 	tblcolLine1, tblcolLine2, tblcolTown, tblcolRegionName, tblcolPostalCode, tblcolCountryName, tblcolCcNumber,
 	tblcolCcExpMonth, tblcolCcExpYear, tblcolCCSecurityCode, tblcolPhone, tblcolEmail;
 	@FXML private TableColumn<Profile, Boolean> tblcolDelete;
-	@FXML private JFXButton btnAdd, btnEdit;
+	@FXML private JFXButton btnAdd, btnUpdateCsv;
 	@FXML private JFXTextField txtSearch;
 	public static Profile profileDataHolder = new Profile();
 	public static boolean edit = false;
@@ -316,12 +316,9 @@ public class ProfileController implements Initializable {
 	}
 
 	@FXML
-	private void edit() throws IOException, SQLException {
-		edit = true;
-		if(tblProfile.getSelectionModel().getSelectedItem() != null)  
-			getData();
-		else
-			Helpers.alert("Warning!", "Pick a row from the table!", AlertType.WARNING);
+	private void updateCsv() throws IOException, SQLException {
+	
+		
 	}
 
 	class EditingCell extends TableCell<Profile, String> {
