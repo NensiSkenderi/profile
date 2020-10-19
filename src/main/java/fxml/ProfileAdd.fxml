@@ -46,17 +46,17 @@
             <Font size="18.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtCountryName" focusColor="#00bcd4" labelFloat="true" layoutX="555.0" layoutY="140.0" prefHeight="39.0" prefWidth="302.0" promptText="Country Name" unFocusColor="#00bcd4">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </JFXTextField>
+      <JFXComboBox fx:id="cmbRegionName" focusColor="#95eaf5" labelFloat="true" layoutX="99.0" layoutY="565.0" prefHeight="39.0" prefWidth="302.0" promptText="Region Name" styleClass="combo-box" stylesheets="@../css/addViews.css" unFocusColor="#95eaf5" />
       <JFXTextField fx:id="txtPostalCode" focusColor="#00bcd4" labelFloat="true" layoutX="99.0" layoutY="658.0" prefHeight="39.0" prefWidth="302.0" promptText="Postal Code" unFocusColor="#00bcd4">
          <font>
             <Font size="18.0" />
          </font>
       </JFXTextField>
-      <JFXComboBox fx:id="cmbRegionName" focusColor="#95eaf5" labelFloat="true" layoutX="99.0" layoutY="565.0" prefHeight="39.0" prefWidth="302.0" promptText="Region Name" styleClass="combo-box" stylesheets="@../css/addViews.css" unFocusColor="#95eaf5" />
+      <JFXTextField fx:id="txtCountryName" focusColor="#00bcd4" labelFloat="true" layoutX="555.0" layoutY="140.0" prefHeight="39.0" prefWidth="302.0" promptText="Country Name" unFocusColor="#00bcd4">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXTextField>
       <JFXTextField fx:id="txtCC" focusColor="#00bcd4" labelFloat="true" layoutX="555.0" layoutY="228.0" prefHeight="39.0" prefWidth="302.0" promptText="CC Number" unFocusColor="#00bcd4">
          <font>
             <Font size="18.0" />

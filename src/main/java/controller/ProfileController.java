@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXAlert;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 
 import javafx.beans.InvalidationListener;
@@ -30,6 +31,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -148,15 +150,17 @@ public class ProfileController implements Initializable {
 					.setTown(t.getNewValue());
 
 				});
+	//	tblcolCountryCode.setCellFactory(ComboBoxTableCell.forTableColumn(lista_e_shteteve));
 		tblcolRegionName.setCellValueFactory(new PropertyValueFactory<>("regionName"));
-		tblcolRegionName.setCellFactory(cellFactory);
-		tblcolRegionName.setOnEditCommit(
-				(TableColumn.CellEditEvent<Profile, String> t) -> {
-					((Profile) t.getTableView().getItems()
-							.get(t.getTablePosition().getRow()))
-					.setRegionName(t.getNewValue());
+		tblcolRegionName.setCellFactory(ComboBoxTableCell.forTableColumn(new ProfileControllerAdd().regionNameList));
+	//	tblcolRegionName.setCellFactory(cellFactory);
+	//	tblcolRegionName.setOnEditCommit(
+	//			(TableColumn.CellEditEvent<Profile, String> t) -> {
+	//				((Profile) t.getTableView().getItems()
+	//						.get(t.getTablePosition().getRow()))
+	//				.setRegionName(t.getNewValue());
 
-				});
+	//			});
 		tblcolPostalCode.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
 		tblcolPostalCode.setCellFactory(cellFactory);
 		tblcolPostalCode.setOnEditCommit(

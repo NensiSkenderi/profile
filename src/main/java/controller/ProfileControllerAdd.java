@@ -2,9 +2,9 @@ package controller;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.Iterator;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
@@ -24,7 +24,7 @@ public class ProfileControllerAdd implements Initializable {
 
 	@FXML private JFXButton btnCancel;
 	@FXML private JFXTextField txtFirstName, txtLastName, txtLine1, txtLine2, txtTown, txtCountryName, txtPostalCode,
-	txtCC, txtCCEXpiryMonth, txtCCExpiryYear, txtCCSecurityCode, txtPhone, txtEmail;
+	txtCC, txtCCExpiryMonth, txtCCExpiryYear, txtCCSecurityCode, txtPhone, txtEmail;
 	@FXML private JFXComboBox<String> cmbRegionName;
 	@FXML private Label lblError;
 	private int profileId = 0;
@@ -47,6 +47,7 @@ public class ProfileControllerAdd implements Initializable {
 		else
 			profileId = 0;
 	}
+	
 
 	private void getData(Profile p) {
 		txtFirstName.setText(p.getFirstName()); 
@@ -56,11 +57,11 @@ public class ProfileControllerAdd implements Initializable {
 		txtTown.setText(p.getTown());
 		txtCountryName.setText(p.getCountryCode());
 		txtPostalCode.setText(p.getPostalCode());
-		//txtCC.setText(p.getCc());
+		txtCC.setText(p.getCcNumber());
 		txtCCSecurityCode.setText(p.getCcSecurityCode());
 		txtPhone.setText(p.getPhone());
 		txtEmail.setText(p.getEmailAddress());
-		txtCCEXpiryMonth.setText(p.getCcExpMonth());
+		txtCCExpiryMonth.setText(p.getCcExpMonth());
 		txtCCExpiryYear.setText(p.getCcExpYear());
 		cmbRegionName.setValue(p.getRegionName());
 
@@ -78,9 +79,9 @@ public class ProfileControllerAdd implements Initializable {
 		p.setTown(txtTown.getText());
 		p.setCountryCode(txtCountryName.getText());
 		p.setPostalCode(txtPostalCode.getText());
-
+		p.setCcNumber(txtCC.getText());
 		//bej set-et e reja nga txt fields e reja qe do shtoje ergi
-		p.setCcExpMonth(txtCCEXpiryMonth.getText());
+		p.setCcExpMonth(txtCCExpiryMonth.getText());
 		p.setCcExpYear(txtCCExpiryYear.getText());
 		p.setRegionName(cmbRegionName.getValue());
 
@@ -108,12 +109,18 @@ public class ProfileControllerAdd implements Initializable {
 
 
 		//menyra 2 - te perdorim open csv
-		String csv = "profile.csv";
+		String csv = "C:\\Users\\User\\Desktop\\Programming\\profile\\src\\main\\java\\profile.csv";
+		
 		CSVWriter writer = new CSVWriter(new FileWriter(csv, true));
-		String [] record = "3,David,Feezor,USA,40".split(",");
+		String [] record = (txtFirstName.getText() + "," + txtLastName.getText() + "," + txtLine1.getText() + "," + txtLine2.getText() +
+				"," + txtTown.getText() + "," + cmbRegionName.getValue() + "," + txtPostalCode.getText() + "," + txtCC.getText() +
+				"," + txtCountryName.getText() + "," + txtCCExpiryMonth.getText() + "," + txtCCExpiryYear.getText() + "," + txtCCSecurityCode.getText() +
+				"," + txtPhone.getText() + "," + txtEmail.getText()).split(",");
 		writer.writeNext(record);
 		writer.close();
 
+
+		
 		Helpers.close_stage(btnCancel);
 	}
 
@@ -124,3 +131,5 @@ public class ProfileControllerAdd implements Initializable {
 	}
 
 }
+
+		
