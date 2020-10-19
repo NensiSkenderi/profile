@@ -1,3 +1,4 @@
 FirstName,LastName,Line1,Line2,Town,RegionName,PostalCode,CountryName,CCNumber,CCExpiryMonth,CCExpiryYear,CCSecurityCode,PhoneNumber,EmailAddress
-John,Doe,123 Main Street,Apt 203,Artesia,CA,90701,United States,1.11111E+15,1,2029,666,5555551212,anyone@anywhere.com
-"aababab","bababab","abababab","baababba","ababab","AK","baabbaabba","bababab","baabab","ababab","ababab","ababab","ababab","ababab"
+John,Doe,123 Main Street,Apt 203,Artesia,CA,90701,United States,1.11E+15,1,2029,666,5555551212,anyone@anywhere.com
+ ,dsf,sdf,s,s,AS, ,i,i,i,i,i,i,i
+" ","j","j","j","j","null","j","j","j","j","j","j","j","j"

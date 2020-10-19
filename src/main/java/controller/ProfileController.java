@@ -57,6 +57,7 @@ public class ProfileController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
 			fillData();
+			searchTableview();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -76,7 +77,7 @@ public class ProfileController implements Initializable {
 			if (firstLine) {
 				firstLine = false;
 				continue;
-			}
+			} 
 			String[] fields = line.split(FieldDelimiter, -1);
 
 			Profile profile = new Profile();
@@ -86,7 +87,7 @@ public class ProfileController implements Initializable {
 			profile.setLine2(fields[3]);
 			profile.setTown(fields[4]);
 			profile.setRegionName(fields[5]);
-			profile.setPostalCode(fields[6]);
+			profile.setPostalCode(fields[6]); 
 			profile.setCountryCode(fields[7]);
 			profile.setCcNumber(fields[8]);
 			profile.setCcExpMonth(fields[9]);
@@ -257,25 +258,6 @@ public class ProfileController implements Initializable {
 		tblProfile.setItems(profileData);
 	}
 
-	private void getData() throws IOException, SQLException {
-		Profile profile = tblProfile.getSelectionModel().getSelectedItem();
-		profileDataHolder.setProfileNumber(profile.getProfileNumber());
-		profileDataHolder.setFirstName(profile.getFirstName());
-		profileDataHolder.setLastName(profile.getLastName());
-		profileDataHolder.setLine1(profile.getLine1());
-		profileDataHolder.setLine2(profile.getLine2());
-		profileDataHolder.setTown(profile.getTown());
-		profileDataHolder.setRegionName(profile.getRegionName());
-		profileDataHolder.setPostalCode(profile.getPostalCode());
-		//profileDataHolder.setCc(profile.getCc());
-		profileDataHolder.setCcSecurityCode(profile.getCcSecurityCode());
-		profileDataHolder.setPhone(profile.getPhone());
-		profileDataHolder.setEmailAddress(profile.getEmailAddress());
-
-		new utils.Helpers().open_edit_scene("ProfileAdd", "icon");
-		if(!ProfileControllerAdd.isCancel)
-		fillData();
-	}
 
 	public void searchTableview() {
 		txtSearch.textProperty().addListener(new InvalidationListener() {
@@ -312,13 +294,12 @@ public class ProfileController implements Initializable {
 		edit = false;
 		new utils.Helpers().open_edit_scene("ProfileAdd", "icon");
 		if(!ProfileControllerAdd.isCancel)
-		fillData();
+			fillData();
 	}
 
 	@FXML
 	private void updateCsv() throws IOException, SQLException {
-	
-		
+		//nk di ca tbej do e lej po ma shpifi dhe mu per kto arsye po se besoj se mund tperdoret si db se ne db ben query ben request kurse ktu lesht
 	}
 
 	class EditingCell extends TableCell<Profile, String> {

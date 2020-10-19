@@ -1,9 +1,12 @@
 package controller;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.security.CodeSource;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -17,6 +20,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import main.Main;
 import model.Profile;
 import utils.Helpers;
 
@@ -33,13 +37,14 @@ public class ProfileControllerAdd implements Initializable {
 			"DE", "DC", "FL", "GA", "GU", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MH", "MD", "MI", "FM", "MN", "MS", "MO", "MT", "NE", "NV",
 			"NH", "NJ", "NM", "NY", "NC", "ND", "MP", "OH", "OK", "OR", "PW", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UM", "VI", "UT", "VT", "VA", "WA", 
 			"WV", "WI", "WY");
-	
-	
+
+
 	ObservableList<Profile> profileData = FXCollections.observableArrayList();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		cmbRegionName.getItems().setAll(regionNameList);
+		//cmbRegionName.setValue("AS");
 		if(ProfileController.edit == true) {
 			profileId = ProfileController.profileDataHolder.getProfileNumber();
 			getData(ProfileController.profileDataHolder);
@@ -47,7 +52,7 @@ public class ProfileControllerAdd implements Initializable {
 		else
 			profileId = 0;
 	}
-	
+
 
 	private void getData(Profile p) {
 		txtFirstName.setText(p.getFirstName()); 
@@ -90,38 +95,41 @@ public class ProfileControllerAdd implements Initializable {
 		p.setEmailAddress(txtEmail.getText());
 		p.setProfileNumber(profileId);
 
+		String csv = getTargetPath().replace("target", "") + "src\\main\\java\\profile.csv";
 
-//		FileWriter pw = new FileWriter("F:\\data.csv");
-//		Iterator s = customerIterator(); --jep error
-//		if (s.hasNext()==false){
-//			System.out.println("Empty");
-//		}
-//		while(s.hasNext()){
-//			Profile profile  = (Profile) s.next();
-//			System.out.println(profile.toString()+"\n");
-//			pw.append(profile.getFirstName());
-//			pw.append(",");
-//			pw.append(profile.getLastName());
-//			pw.append("\n");
-//		}
-//		pw.flush();
-//		pw.close();
-
-
-		//menyra 2 - te perdorim open csv
-		String csv = "C:\\Users\\User\\Desktop\\Programming\\profile\\src\\main\\java\\profile.csv";
-		
 		CSVWriter writer = new CSVWriter(new FileWriter(csv, true));
-		String [] record = (txtFirstName.getText() + "," + txtLastName.getText() + "," + txtLine1.getText() + "," + txtLine2.getText() +
-				"," + txtTown.getText() + "," + cmbRegionName.getValue() + "," + txtPostalCode.getText() + "," + txtCC.getText() +
-				"," + txtCountryName.getText() + "," + txtCCExpiryMonth.getText() + "," + txtCCExpiryYear.getText() + "," + txtCCSecurityCode.getText() +
-				"," + txtPhone.getText() + "," + txtEmail.getText()).split(",");
+		String [] record = (txtFirstName.getText().toString() == "" ? txtFirstName.getText().toString() : " " + 
+				"," + txtLastName.getText().toString() + ","
+				+ txtLine1.getText().toString() + "," + 
+				txtLine2.getText().toString() +
+				"," + txtTown.getText().toString() + ","
+				+ cmbRegionName.getValue() + ","
+				+ txtPostalCode.getText().toString() + "," + 
+				txtCC.getText().toString() +
+				"," + txtCountryName.getText().toString()
+				+ "," + txtCCExpiryMonth.getText().toString() + "," 
+				+ txtCCExpiryYear.getText().toString() + 
+				"," + txtCCSecurityCode.getText().toString()
+				+ "," + txtPhone.getText().toString() + "," 
+				+ txtEmail.getText().toString()).split(",");
 		writer.writeNext(record);
 		writer.close();
 
-
-		
 		Helpers.close_stage(btnCancel);
+
+
+	}
+
+	public static String getTargetPath() {
+		CodeSource codeSource = Main.class.getProtectionDomain().getCodeSource();
+		File jarFile = null;
+		try {
+			jarFile = new File(codeSource.getLocation().toURI().getPath());
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		String jarDir = jarFile.getParentFile().getPath();
+		return jarDir;
 	}
 
 	@FXML
@@ -132,4 +140,4 @@ public class ProfileControllerAdd implements Initializable {
 
 }
 
-		
+

@@ -21,11 +21,10 @@ public class Main extends Application {
     	root=(Parent)loader.load();
     	
     	Scene scene = new Scene(root);
-    	primaryStage.setResizable(true);
     	primaryStage.setScene(scene);
     	primaryStage.setTitle("Profile");
     	primaryStage.getIcons().add(new Image("/images/icon.png"));
-    	primaryStage.setMaximized(true);
+    	//primaryStage.setMaximized(true);
     	primaryStage.show();
     }
 
