@@ -77,42 +77,39 @@ public class ProfileControllerAdd implements Initializable {
 		isCancel = false;
 		Profile p = new Profile();
 		p.setProfileNumber(profileId);
-		p.setFirstName(txtFirstName.getText());
-		p.setLastName(txtLastName.getText());
-		p.setLine1(txtLine1.getText());
-		p.setLine2(txtLine2.getText());
-		p.setTown(txtTown.getText());
-		p.setCountryCode(txtCountryName.getText());
-		p.setPostalCode(txtPostalCode.getText());
-		p.setCcNumber(txtCC.getText());
-		//bej set-et e reja nga txt fields e reja qe do shtoje ergi
-		p.setCcExpMonth(txtCCExpiryMonth.getText());
-		p.setCcExpYear(txtCCExpiryYear.getText());
+		p.setFirstName(!txtFirstName.getText().toString().isEmpty() ? txtFirstName.getText().toString() : " ");
+		p.setLastName(!txtLastName.getText().toString().isEmpty() ? txtLastName.getText().toString() : " ");
+		p.setLine1(!txtLine1.getText().toString().isEmpty() ? txtLine1.getText().toString() : " ");
+		p.setLine2(!txtLine2.getText().toString().isEmpty() ? txtLine2.getText().toString() : " ");
+		p.setTown(!txtTown.getText().toString().isEmpty() ? txtTown.getText().toString() : " ");
+		p.setCountryCode(!txtCountryName.getText().toString().isEmpty() ? txtCountryName.getText().toString() : " ");
+		p.setPostalCode(!txtPostalCode.getText().toString().isEmpty() ? txtPostalCode.getText().toString() : " ");
+		p.setCcNumber(!txtCC.getText().toString().isEmpty() ? txtCC.getText().toString() : " ");
+		p.setCcExpMonth(!txtCCExpiryMonth.getText().toString().isEmpty() ? txtCCExpiryMonth.getText().toString() : " ");
+		p.setCcExpYear(!txtCCExpiryYear.getText().toString().isEmpty() ? txtCCExpiryYear.getText().toString() : " ");
 		p.setRegionName(cmbRegionName.getValue());
-
-		p.setCcSecurityCode(txtCCSecurityCode.getText());
-		p.setPhone(txtPhone.getText());
-		p.setEmailAddress(txtEmail.getText());
+		p.setCcSecurityCode(!txtCCSecurityCode.getText().toString().isEmpty() ? txtCCSecurityCode.getText().toString() : " ");
+		p.setPhone(!txtPhone.getText().toString().isEmpty() ? txtPhone.getText().toString() : " ");
+		p.setEmailAddress(!txtEmail.getText().toString().isEmpty() ? txtEmail.getText().toString() : " ");
 		p.setProfileNumber(profileId);
 
 		String csv = getTargetPath().replace("target", "") + "src\\main\\java\\profile.csv";
+		CSVWriter writer =
+				new CSVWriter(
+						new FileWriter(csv, true),
+						CSVWriter.DEFAULT_SEPARATOR,
+						CSVWriter.NO_QUOTE_CHARACTER,
+						CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+						CSVWriter.DEFAULT_LINE_END);
 
-		CSVWriter writer = new CSVWriter(new FileWriter(csv, true));
-		String [] record = (txtFirstName.getText().toString() == "" ? txtFirstName.getText().toString() : " " + 
-				"," + txtLastName.getText().toString() + ","
-				+ txtLine1.getText().toString() + "," + 
-				txtLine2.getText().toString() +
-				"," + txtTown.getText().toString() + ","
-				+ cmbRegionName.getValue() + ","
-				+ txtPostalCode.getText().toString() + "," + 
-				txtCC.getText().toString() +
-				"," + txtCountryName.getText().toString()
-				+ "," + txtCCExpiryMonth.getText().toString() + "," 
-				+ txtCCExpiryYear.getText().toString() + 
-				"," + txtCCSecurityCode.getText().toString()
-				+ "," + txtPhone.getText().toString() + "," 
-				+ txtEmail.getText().toString()).split(",");
+		String [] record = (p.getFirstName() + "," + p.getLastName() + ","  + p.getLine1() + "," +
+				p.getLine2()  +  "," + p.getTown() + ","  + p.getRegionName() + "," + p.getPostalCode() + "," +
+				p.getCcNumber()  +  "," + p.getCountryCode()  + ","  + "," + p.getCcExpMonth()  + "," 
+				+ p.getCcExpYear()  + "," + p.getCcSecurityCode()   + "," + p.getPhone()  + "," 
+				+ p.getEmailAddress()).split(",");
+		
 		writer.writeNext(record);
+		writer.flush();
 		writer.close();
 
 		Helpers.close_stage(btnCancel);

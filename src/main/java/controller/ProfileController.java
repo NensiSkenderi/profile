@@ -71,7 +71,7 @@ public class ProfileController implements Initializable {
 				getClass().getClassLoader().getResourceAsStream("profile.csv");
 		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 		boolean firstLine = true;
-
+		
 		String line;
 		while ((line = reader.readLine()) != null) {
 			if (firstLine) {
@@ -299,7 +299,7 @@ public class ProfileController implements Initializable {
 
 	@FXML
 	private void updateCsv() throws IOException, SQLException {
-		//nk di ca tbej do e lej po ma shpifi dhe mu per kto arsye po se besoj se mund tperdoret si db se ne db ben query ben request kurse ktu lesht
+		fillData();
 	}
 
 	class EditingCell extends TableCell<Profile, String> {
