@@ -65,7 +65,7 @@
 				<Insets bottom="20.0" />
 			</padding>
 		</AnchorPane>
-		<TableView fx:id="tblProfile" maxHeight="1.7976931348623157E308" prefHeight="812.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+		<TableView fx:id="tblProfile" maxHeight="1.7976931348623157E308" prefHeight="812.0" prefWidth="600.0" stylesheets="@../css/jfxcombo_box.css" VBox.vgrow="ALWAYS">
 			<columns>
 				<TableColumn fx:id="tblcolProfileNumber" prefWidth="673.0" text="Id" visible="false" />
 				<TableColumn fx:id="tblcolFirstName" prefWidth="673.0" text="First Name" />

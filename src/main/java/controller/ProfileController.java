@@ -30,6 +30,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -408,6 +409,7 @@ public class ProfileController implements Initializable {
 
 		private void createTextField() {
 			textField = new TextField(getString());
+			textField.setStyle("-fx-text-fill : black;");
 			textField.setMinWidth(this.getWidth() - this.getGraphicTextGap() * 2);
 			textField.setOnAction((e) -> commitEdit(textField.getText()));
 			textField.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
@@ -423,10 +425,12 @@ public class ProfileController implements Initializable {
 	}
 
 	private class ButtonCell extends TableCell<Profile, Boolean> {
-		final Button cellButton = new Button("Delete");
-
+		final Button cellButton = new Button("");
+		
 		ButtonCell(){
-
+			cellButton.setMaxWidth(30);
+			cellButton.setCursor(Cursor.HAND);
+			cellButton.getStyleClass().add("delete");
 			//Action when the button is pressed
 			cellButton.setOnAction(new EventHandler<ActionEvent>(){
 
