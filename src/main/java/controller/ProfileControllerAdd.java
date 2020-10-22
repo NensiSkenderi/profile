@@ -93,7 +93,8 @@ public class ProfileControllerAdd implements Initializable {
 		p.setEmailAddress(!txtEmail.getText().toString().isEmpty() ? txtEmail.getText().toString() : " ");
 		p.setProfileNumber(profileId);
 
-		String csv = getTargetPath().replace("target", "") + "src\\main\\java\\profile.csv";
+	//	String csv = getTargetPath().replace("target", "") + "src\\main\\java\\profile.csv";
+		String csv = System.getProperty("user.home") + "/Desktop/profile.csv";
 		CSVWriter writer =
 				new CSVWriter(
 						new FileWriter(csv, true),
@@ -104,7 +105,7 @@ public class ProfileControllerAdd implements Initializable {
 
 		String [] record = (p.getFirstName() + "," + p.getLastName() + ","  + p.getLine1() + "," +
 				p.getLine2()  +  "," + p.getTown() + ","  + p.getRegionName() + "," + p.getPostalCode() + "," +
-				p.getCcNumber()  +  "," + p.getCountryCode()  + ","  + "," + p.getCcExpMonth()  + "," 
+				p.getCcNumber()  +  "," + p.getCountryCode()  + ","  + p.getCcExpMonth()  + "," 
 				+ p.getCcExpYear()  + "," + p.getCcSecurityCode()   + "," + p.getPhone()  + "," 
 				+ p.getEmailAddress()).split(",");
 		

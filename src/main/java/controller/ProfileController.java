@@ -1,11 +1,15 @@
 package controller;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -56,8 +60,17 @@ public class ProfileController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
+			File file = new File(System.getProperty("user.home") + "/Desktop/profile.csv");
+			if(file.exists()) {
 			fillData();
 			searchTableview();
+			}
+			else
+			{
+				createCSV();
+				fillData();
+				searchTableview();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -67,9 +80,10 @@ public class ProfileController implements Initializable {
 		tblProfile.getItems().clear();
 		String FieldDelimiter = ",";
 
-		InputStream inputStream = 
-				getClass().getClassLoader().getResourceAsStream("profile.csv");
-		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+	//			getClass().getClassLoader().getResourceAsStream("profile.csv");
+		 String input = System.getProperty("user.home") + "/Desktop/profile.csv";
+		 
+		BufferedReader reader = new BufferedReader(new FileReader(input));
 		boolean firstLine = true;
 		
 		String line;
@@ -232,7 +246,7 @@ public class ProfileController implements Initializable {
 					((Profile) t.getTableView().getItems()
 							.get(t.getTablePosition().getRow()))
 					.setEmailAddress(t.getNewValue());
-
+					
 				});
 		tblcolDelete.setCellValueFactory(
 				new Callback<TableColumn.CellDataFeatures<Profile, Boolean>, 
@@ -256,7 +270,8 @@ public class ProfileController implements Initializable {
 				});
 
 		tblProfile.setItems(profileData);
-	}
+		 }
+	
 
 
 	public void searchTableview() {
@@ -293,13 +308,53 @@ public class ProfileController implements Initializable {
 	private void add() throws IOException, SQLException {
 		edit = false;
 		new utils.Helpers().open_edit_scene("ProfileAdd", "icon");
-		if(!ProfileControllerAdd.isCancel)
+		if(!ProfileControllerAdd.isCancel) 
 			fillData();
 	}
 
 	@FXML
 	private void updateCsv() throws IOException, SQLException {
+		deleteCSV();
+		createCSV();
 		fillData();
+	}
+	
+	private void deleteCSV() {
+		File f = new File(System.getProperty("user.home") + "/Desktop/profile.csv");
+		if(f.delete()) {
+			System.out.println("Success!");
+		}
+		else 
+			System.out.println("Failed!");
+	}
+	
+	private void createCSV() {
+		try {
+		File f = new File(System.getProperty("user.home") + "/Desktop/profile.csv");
+		FileWriter fileWriter = new FileWriter(f);
+
+		String text = "";
+		String header = "FirstName" + "," + "LastName" + "," + "Line1" + "," + "Line2"  + "," + "Town" + "," + "RegionName" + 
+					"," +	"PostalCode" + "," + "CountryName" + "," + "CCNumber" + "," + "CCExpiryMonth"  + "," + "CCExpiryYear" + "," + "CCSecurityCode" +
+					"," + "PhoneNumber" + "," + "EmailAddress" + "," + "\n" ;
+
+
+		fileWriter.write(header);
+		for(int i=0; i<profileData.size(); i++){
+
+			text =  profileData.get(i).getFirstName()+ "," + profileData.get(i).getLastName() + "," + profileData.get(i).getLine1()+ "," 
+					+ profileData.get(i).getLine2() + "," + profileData.get(i).getTown() + "," + profileData.get(i).getRegionName()+ "," 
+					+ profileData.get(i).getPostalCode() + "," + profileData.get(i).getCountryCode()+ "," 
+							+ profileData.get(i).getCcNumber() + "," + profileData.get(i).getCcExpMonth() + "," + profileData.get(i).getCcExpYear() + "," 
+					+ profileData.get(i).getCcSecurityCode() + "," + profileData.get(i).getPhone() + "," + profileData.get(i).getEmailAddress() + "," + "\n";
+			fileWriter.write(text);
+		}
+
+		fileWriter.close();
+
+	} catch (Exception ex) {
+		System.out.println(ex.getMessage());
+	}
 	}
 
 	class EditingCell extends TableCell<Profile, String> {
