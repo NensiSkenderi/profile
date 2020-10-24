@@ -62,16 +62,11 @@ public class ProfileController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
 			File file = new File(System.getProperty("user.home") + "/Desktop/profile.csv");
-			if(file.exists()) {
+			if(!file.exists()) 
+				createCSV();
+			
 			fillData();
 			searchTableview();
-			}
-			else
-			{
-				createCSV();
-				fillData();
-				searchTableview();
-			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -81,12 +76,12 @@ public class ProfileController implements Initializable {
 		tblProfile.getItems().clear();
 		String FieldDelimiter = ",";
 
-	//			getClass().getClassLoader().getResourceAsStream("profile.csv");
-		 String input = System.getProperty("user.home") + "/Desktop/profile.csv";
-		 
+		//			getClass().getClassLoader().getResourceAsStream("profile.csv");
+		String input = System.getProperty("user.home") + "/Desktop/profile.csv";
+
 		BufferedReader reader = new BufferedReader(new FileReader(input));
 		boolean firstLine = true;
-		
+
 		String line;
 		while ((line = reader.readLine()) != null) {
 			if (firstLine) {
@@ -166,17 +161,17 @@ public class ProfileController implements Initializable {
 					.setTown(t.getNewValue());
 
 				});
-	//	tblcolCountryCode.setCellFactory(ComboBoxTableCell.forTableColumn(lista_e_shteteve));
+		//	tblcolCountryCode.setCellFactory(ComboBoxTableCell.forTableColumn(lista_e_shteteve));
 		tblcolRegionName.setCellValueFactory(new PropertyValueFactory<>("regionName"));
 		tblcolRegionName.setCellFactory(ComboBoxTableCell.forTableColumn(new ProfileControllerAdd().regionNameList));
-	//	tblcolRegionName.setCellFactory(cellFactory);
-	//	tblcolRegionName.setOnEditCommit(
-	//			(TableColumn.CellEditEvent<Profile, String> t) -> {
-	//				((Profile) t.getTableView().getItems()
-	//						.get(t.getTablePosition().getRow()))
-	//				.setRegionName(t.getNewValue());
+		//	tblcolRegionName.setCellFactory(cellFactory);
+		//	tblcolRegionName.setOnEditCommit(
+		//			(TableColumn.CellEditEvent<Profile, String> t) -> {
+		//				((Profile) t.getTableView().getItems()
+		//						.get(t.getTablePosition().getRow()))
+		//				.setRegionName(t.getNewValue());
 
-	//			});
+		//			});
 		tblcolPostalCode.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
 		tblcolPostalCode.setCellFactory(cellFactory);
 		tblcolPostalCode.setOnEditCommit(
@@ -247,7 +242,7 @@ public class ProfileController implements Initializable {
 					((Profile) t.getTableView().getItems()
 							.get(t.getTablePosition().getRow()))
 					.setEmailAddress(t.getNewValue());
-					
+
 				});
 		tblcolDelete.setCellValueFactory(
 				new Callback<TableColumn.CellDataFeatures<Profile, Boolean>, 
@@ -271,8 +266,8 @@ public class ProfileController implements Initializable {
 				});
 
 		tblProfile.setItems(profileData);
-		 }
-	
+	}
+
 
 
 	public void searchTableview() {
@@ -319,7 +314,7 @@ public class ProfileController implements Initializable {
 		createCSV();
 		fillData();
 	}
-	
+
 	private void deleteCSV() {
 		File f = new File(System.getProperty("user.home") + "/Desktop/profile.csv");
 		if(f.delete()) {
@@ -328,34 +323,34 @@ public class ProfileController implements Initializable {
 		else 
 			System.out.println("Failed!");
 	}
-	
+
 	private void createCSV() {
 		try {
-		File f = new File(System.getProperty("user.home") + "/Desktop/profile.csv");
-		FileWriter fileWriter = new FileWriter(f);
+			File f = new File(System.getProperty("user.home") + "/Desktop/profile.csv");
+			FileWriter fileWriter = new FileWriter(f);
 
-		String text = "";
-		String header = "FirstName" + "," + "LastName" + "," + "Line1" + "," + "Line2"  + "," + "Town" + "," + "RegionName" + 
+			String text = "";
+			String header = "FirstName" + "," + "LastName" + "," + "Line1" + "," + "Line2"  + "," + "Town" + "," + "RegionName" + 
 					"," +	"PostalCode" + "," + "CountryName" + "," + "CCNumber" + "," + "CCExpiryMonth"  + "," + "CCExpiryYear" + "," + "CCSecurityCode" +
 					"," + "PhoneNumber" + "," + "EmailAddress" + "," + "\n" ;
 
 
-		fileWriter.write(header);
-		for(int i=0; i<profileData.size(); i++){
+			fileWriter.write(header);
+			for(int i=0; i<profileData.size(); i++){
 
-			text =  profileData.get(i).getFirstName()+ "," + profileData.get(i).getLastName() + "," + profileData.get(i).getLine1()+ "," 
-					+ profileData.get(i).getLine2() + "," + profileData.get(i).getTown() + "," + profileData.get(i).getRegionName()+ "," 
-					+ profileData.get(i).getPostalCode() + "," + profileData.get(i).getCountryCode()+ "," 
-							+ profileData.get(i).getCcNumber() + "," + profileData.get(i).getCcExpMonth() + "," + profileData.get(i).getCcExpYear() + "," 
-					+ profileData.get(i).getCcSecurityCode() + "," + profileData.get(i).getPhone() + "," + profileData.get(i).getEmailAddress() + "," + "\n";
-			fileWriter.write(text);
+				text =  profileData.get(i).getFirstName()+ "," + profileData.get(i).getLastName() + "," + profileData.get(i).getLine1()+ "," 
+						+ profileData.get(i).getLine2() + "," + profileData.get(i).getTown() + "," + profileData.get(i).getRegionName()+ "," 
+						+ profileData.get(i).getPostalCode() + "," + profileData.get(i).getCountryCode()+ "," 
+						+ profileData.get(i).getCcNumber() + "," + profileData.get(i).getCcExpMonth() + "," + profileData.get(i).getCcExpYear() + "," 
+						+ profileData.get(i).getCcSecurityCode() + "," + profileData.get(i).getPhone() + "," + profileData.get(i).getEmailAddress() + "," + "\n";
+				fileWriter.write(text);
+			}
+
+			fileWriter.close();
+
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
 		}
-
-		fileWriter.close();
-
-	} catch (Exception ex) {
-		System.out.println(ex.getMessage());
-	}
 	}
 
 	class EditingCell extends TableCell<Profile, String> {
@@ -426,7 +421,7 @@ public class ProfileController implements Initializable {
 
 	private class ButtonCell extends TableCell<Profile, Boolean> {
 		final Button cellButton = new Button("");
-		
+
 		ButtonCell(){
 			cellButton.setMaxWidth(30);
 			cellButton.setCursor(Cursor.HAND);
